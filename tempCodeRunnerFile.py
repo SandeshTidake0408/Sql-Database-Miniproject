@@ -1,2 +1,1 @@
-
-                      bg="#FFBE79", fg="#374151")
+borderwidth=0, relief="flat", highlightthickness=0, 

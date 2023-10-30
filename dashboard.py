@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 from course import CourseClass
 from student import StudentClass
+from results import ResultClass
 
 
 class RMS:
@@ -23,7 +24,7 @@ class RMS:
         btn_student = Button(m_frame, text="Student", font=(
             "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2", command=self.add_student).place(x=240, y=5, width=200, height=40)
         btn_result = Button(m_frame, text="Result", font=(
-            "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=460, y=5, width=200, height=40)
+            "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2", command=self.add_result).place(x=460, y=5, width=200, height=40)
         btn_view = Button(m_frame, text="View Results", font=(
             "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=680, y=5, width=200, height=40)
         btn_logout = Button(m_frame, text="Logout", font=(
@@ -59,6 +60,10 @@ class RMS:
     def add_student(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = StudentClass(self.new_win)
+
+    def add_result(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = ResultClass(self.new_win)
 
 
 if __name__ == "__main__":

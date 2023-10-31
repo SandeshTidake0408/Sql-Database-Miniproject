@@ -1,3 +1,4 @@
+import sqlite3
 from tkinter import *
 from PIL import Image, ImageTk
 from course import CourseClass
@@ -43,12 +44,20 @@ class RMS:
             x=600, y=155, width=820, height=500)
 
         # details
-        self.course_lbl = Label(self.root, text="Total Course\n[ 0 ]", font=(
-            "Mukta", 15)).place(x=600, y=670, width=200, height=70)
-        self.student_lbl = Label(self.root, text="Total Student\n[ 0 ]", font=(
-            "Mukta", 15),).place(x=880, y=670, width=200, height=70)
-        self.result_lbl = Label(self.root, text="Total Results\n[ 0 ]", font=(
-            "Mukta", 15)).place(x=1120, y=670, width=200, height=70)
+        self.var_student = StringVar()
+        self.var_course = StringVar()
+        self.var_result = StringVar()
+
+        self.total_course()
+        self.total_result()
+        self.total_student()
+
+        self.course_lbl = Label(self.root, text="Total Students : {0}".format(self.var_student.get()), font=(
+            "Mukta", 15)).place(x=150, y=250, width=200, height=70)
+        self.student_lbl = Label(self.root, text="Total Courses : {0}".format(self.var_course.get()), font=(
+            "Mukta", 15),).place(x=150, y=400, width=200, height=70)
+        self.result_lbl = Label(self.root, text="Total Results : {0}".format(self.var_result.get()), font=(
+            "Mukta", 15)).place(x=150, y=550, width=200, height=70)
 
         # footer
         footer = Label(self.root, text="EduTracer Stuent Grade Tracer      Contact Us: Email:sandeshtidake37@gmail.com",
@@ -69,6 +78,27 @@ class RMS:
     def report(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = ReportClass(self.new_win)
+
+    def total_student(self):
+        con = sqlite3.connect(database="rms.db")
+        cursor = con.cursor()
+        cursor.execute("select count(*) from student")
+        count = cursor.fetchone()[0]
+        self.var_student.set(count)
+
+    def total_course(self):
+        con = sqlite3.connect(database="rms.db")
+        cursor = con.cursor()
+        cursor.execute("select count(*) from course")
+        count = cursor.fetchone()[0]
+        self.var_course.set(count)
+
+    def total_result(self):
+        con = sqlite3.connect(database="rms.db")
+        cursor = con.cursor()
+        cursor.execute("select count(*) from result")
+        count = cursor.fetchone()[0]
+        self.var_result.set(count)
 
 
 if __name__ == "__main__":

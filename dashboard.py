@@ -16,7 +16,7 @@ class RMS:
                       'bold'), bg="#FFBE79", fg="#374151").place(x=0, y=0, relwidth=1, height=50)
         # menu
         m_frame = LabelFrame(self.root, text="Menu", font=(
-            "Mukta", 15), bg="white", padx=5)
+            "Mukta", 15),fg='black' ,bg="white", padx=5)
         m_frame.place(x=10, y=70, width=1400, relwidth=1, height=80)
 
         btn_course = Button(m_frame, text="Course", font=(

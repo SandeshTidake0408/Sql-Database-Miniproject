@@ -103,16 +103,16 @@ class StudentClass:
         # button--------------------
 
         self.btn_add = Button(self.root, text="Save", font=(
-            "Mukta", 15, "bold"), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.add)
+            "Mukta", 15, "bold"), bg="lightgreen", fg="white", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.add)
         self.btn_add.place(x=120, y=420, width=110, height=40)
         self.btn_add = Button(self.root, text="Update", font=(
-            "Mukta", 15, "bold"), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.update)
+            "Mukta", 15, "bold"), bg="#845EC2", fg="white", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.update)
         self.btn_add.place(x=270, y=420, width=110, height=40)
         self.btn_add = Button(self.root, text="Delete", font=(
-            "Mukta", 15, "bold"), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.delete)
+            "Mukta", 15, "bold"), bg="#FF8066", fg="white", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.delete)
         self.btn_add.place(x=410, y=420, width=110, height=40)
         self.btn_add = Button(self.root, text="Clear", font=(
-            "Mukta", 15, "bold"), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.clear)
+            "Mukta", 15, "bold"), bg="#374151", fg="white", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.clear)
         self.btn_add.place(x=550, y=420, width=110, height=40)
 
         # search pannel -------
@@ -120,9 +120,9 @@ class StudentClass:
         search_course_roll = Label(self.root, text="Search By | Roll No :", font=(
             "Mukta", 15), bg="white", fg="black").place(x=720, y=70)
         self.search_roll = Entry(self.root, textvariable=self.var_search, font=(
-            "Mukta", 12),  bg="#FFFACA", fg="black").place(x=980, y=75, width=180)
+            "Mukta", 12),  bg="#FFFACA", fg="black").place(x=930, y=75, width=180)
         self.btn_serach = Button(self.root, text="Search", font=(
-            "Mukta", 15, "bold"), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.search).place(x=1170, y=70, width=100, height=30)
+            "Mukta", 15, "bold"), bg="#374151", fg="white", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.search).place(x=1170, y=70, width=100, height=30)
 
         # content ---------------in table tree
         self.c_frame = Frame(self.root, bd=2, relief=RIDGE)

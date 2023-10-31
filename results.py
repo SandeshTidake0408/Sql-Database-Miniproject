@@ -8,7 +8,7 @@ class ResultClass:
     def __init__(self, root):
         self.root = root
         self.root.title("EduTracer - Student Grade Tracer")
-        self.root.geometry("1400x750+80+170")
+        self.root.geometry("1300x750+80+170")
         self.root.config(bg="white")
         self.root.focus_force()
 
@@ -17,29 +17,56 @@ class ResultClass:
 
         # label-----------------
         lbl_select = Label(self.root, text="Select Student", font=(
-            "Mukta", 17, "bold"), bg="white").place(x=50, y=100)
+            "Mukta", 17), fg="#374151", bg="white").place(x=50, y=100)
         lbl_name = Label(self.root, text="Name", font=(
-            "Mukta", 17, "bold"), bg="white").place(x=50, y=160)
+            "Mukta", 17), fg="#374151", bg="white").place(x=50, y=160)
         lbl_course = Label(self.root, text="Course", font=(
-            "Mukta", 17, "bold"), bg="white").place(x=50, y=220)
+            "Mukta", 17), fg="#374151", bg="white").place(x=50, y=220)
         lbl_marks_ob = Label(self.root, text="Marks Obtained", font=(
-            "Mukta", 17, "bold"), bg="white").place(x=50, y=280)
+            "Mukta", 17), fg="#374151", bg="white").place(x=50, y=280)
         lbl_full_marks = Label(self.root, text="Full Marks", font=(
-            "Mukta", 17, "bold"), bg="white").place(x=50, y=340)
+            "Mukta", 17), fg="#374151", bg="white").place(x=50, y=340)
 
-        self.var_student = StringVar()
+        self.var_roll = StringVar()
         self.var_name = StringVar()
         self.var_course = StringVar()
+        self.var_marks = StringVar()
+        self.var_fullmarks = StringVar()
+
         # Entry Field------------------------
-        self.txt_course_name = Entry(self.root, textvariable=self.var_student, font=(
-            "Mukta", 12),  bg="#FFFACA", fg="black")
-        self.txt_course_name.place(x=250, y=165, width=200)
+        self.roll_list = ["Select"]
 
-        txt_course_duration = Entry(self.root, textvariable=self.var_name, font=(
-            "Mukta", 12),  bg="#FFFACA", fg="black").place(x=250, y=228, width=200)
+        self.txt_student = ttk.Combobox(self.root, textvariable=self.var_roll, values=self.roll_list, font=(
+            "Mukta", 15), state='readonly', justify=CENTER)
+        self.txt_student.place(x=270, y=105, width=140)
+        self.txt_student.current(0)
+        self.btn_select = Button(self.root, text="Select", font=(
+            "Mukta", 15, "bold"), bg="#374151", fg="white", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2").place(x=420, y=105, width=100, height=30)
 
-        txt_course_charges = Entry(self.root, textvariable=self.var_course, font=(
-            "Mukta", 12),  bg="#FFFACA", fg="black").place(x=250, y=290, width=200)
+        txt_name = Entry(self.root, textvariable=self.var_name, font=(
+            "Mukta", 15),  bg="lightyellow", fg="black").place(x=270, y=165, width=250)
+
+        txt_course = Entry(self.root, textvariable=self.var_course, font=(
+            "Mukta", 15),  bg="lightyellow", fg="black").place(x=270, y=228, width=250)
+
+        txt_marks = Entry(self.root, textvariable=self.var_marks, font=(
+            "Mukta", 15),  bg="lightyellow", fg="black").place(x=270, y=290, width=250)
+        txt_fullmarks = Entry(self.root, textvariable=self.var_fullmarks, font=(
+            "Mukta", 15),  bg="lightyellow", fg="black").place(x=270, y=345, width=250)
+
+        # button=============
+        btn_add = Button(self.root, text="Submit", font=("Mukta", 15), bg="lightgreen",
+                         activebackground="lightgreen", cursor="hand2", borderwidth=0, relief="flat", highlightthickness=0).place(x=270, y=420, width=120, height=35)
+        btn_clear = Button(self.root, text="Clear", font=("Mukta", 15), bg="lightgray",
+                           activebackground="lightgray", cursor="hand2", borderwidth=0, relief="flat", highlightthickness=0).place(x=400, y=420, width=120, height=35)
+        # image============
+        self.bg_img = Image.open("images/result.jpg")
+        self.bg_img = self.bg_img.resize(
+            (400, 400), Image.Resampling.LANCZOS)
+        self.bg_img = ImageTk.PhotoImage(self.bg_img)
+
+        self.bg_label = Label(self.root, image=self.bg_img, ).place(
+            x=630, y=100)
 
 
 if __name__ == "__main__":

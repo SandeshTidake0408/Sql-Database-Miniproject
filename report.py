@@ -16,13 +16,13 @@ class ReportClass:
                       bg="#FFBE79", fg="#374151").place(x=10, y=15, width=1380, height=45)
 
         self.var_search = StringVar()
-
+        self.var_id=""
         lbl_search = Label(self.root, text="Search by Roll Number", font=(
             "Mukta", 17, "bold"), bg="lightyellow", fg="#374151").place(x=320, y=100)
         txt_search = Entry(self.root, textvariable=self.var_search , font=(
             "Mukta", 17), fg="black",bg="lightyellow").place(x=520, y=100, width=150)
         btn_search = Button(self.root, text="Search", font=("Mukta", 15, "bold"), bg="#03a9f4", fg="black", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.search).place(x=700,y=100,width=100,height=35)
-        btn_clear = Button(self.root, text="Clear", font=("Mukta", 15, "bold"), bg="gray", fg="black", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2").place(x=850,y=100,width=100,height=35)
+        btn_clear = Button(self.root, text="Clear", font=("Mukta", 15, "bold"), bg="gray", fg="black", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2", command=self.clear).place(x=850,y=100,width=100,height=35)
 
 
         lbl_roll = Label(self.root, text="Roll No", font=("Mukta", 17, "bold"), bg="white",fg="#374151", bd=2, relief=GROOVE).place(x=150,y=230,width=150,height=50)
@@ -46,7 +46,7 @@ class ReportClass:
         self.per.place(x=900,y=280,width=150,height=50)
 
 
-        btn_delete = Button(self.root, text="Delete", font=("Mukta", 15, "bold"), bg="red", fg="black", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2").place(x=500,y=350,width=150,height=35)
+        btn_delete = Button(self.root, text="Delete", font=("Mukta", 15, "bold"), bg="red", fg="black", borderwidth=0, relief="flat", highlightthickness=0,  cursor="hand2",command=self.delete).place(x=500,y=350,width=150,height=35)
 
 
     def search(self):
@@ -59,6 +59,7 @@ class ReportClass:
                 cursor.execute("select * from result where roll=?",(self.var_search.get(),))
                 row = cursor.fetchone()
                 if row!=None:
+                    self.var_id=row[0]
                     self.roll.config(text=row[1])
                     self.name.config(text=row[2])
                     self.course.config(text=row[3])
@@ -71,6 +72,43 @@ class ReportClass:
         except Exception as ex:
             messagebox.showerror("Error", f"Error due to {str(ex)}")
 
+    
+    def clear(self):
+        self.var_id=""
+        self.roll.config(text="")
+        self.name.config(text="")
+        self.course.config(text="")
+        self.marks.config(text="")
+        self.full.config(text="")
+        self.per.config(text="")
+        self.var_search.set("")
+
+    def delete(self):
+        con = sqlite3.connect(database="rms.db")
+        cursor = con.cursor()
+        try:
+            if self.var_id == "":
+                messagebox.showerror("Eror", "Search Student result first", parent=self.root)
+            else:
+                cursor.execute("select * from result where rid=?",
+                               (self.var_id,))
+                row = cursor.fetchone()
+                if row == None:
+                    messagebox.showerror(
+                        "Error", "Invalid Student Result", parent=self.root)
+                else:
+                    op = messagebox.askyesno(
+                        "Confirm", "Do you really want to delete ?", parent=self.root)
+                    if op == True:
+                        cursor.execute(
+                            "delete from result where rid=?", (self.var_id,))
+                        con.commit()
+                        messagebox.showinfo(
+                            "Delete", "Result Deleted Successfully", parent=self.root)
+                        self.clear()
+
+        except Exception as ex:
+            messagebox.showerror("Error", "Error due to {str(ex)}")
 
 if __name__ == "__main__":
     root = Tk()

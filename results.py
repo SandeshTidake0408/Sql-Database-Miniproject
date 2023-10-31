@@ -60,7 +60,7 @@ class ResultClass:
         btn_clear = Button(self.root, text="Clear", font=("Mukta", 15), bg="lightgray",
                            activebackground="lightgray", cursor="hand2", borderwidth=0, relief="flat", highlightthickness=0).place(x=400, y=420, width=120, height=35)
         # image============
-        self.bg_img = Image.open("images/result.jpg")
+        self.bg_img = Image.open("/Users/ramk./Desktop/Bugs/mini/Sql-Database-Miniproject/images/result.jpg")
         self.bg_img = self.bg_img.resize(
             (400, 400), Image.Resampling.LANCZOS)
         self.bg_img = ImageTk.PhotoImage(self.bg_img)

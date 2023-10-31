@@ -61,7 +61,7 @@ class ResultClass:
         btn_clear = Button(self.root, text="Clear", font=("Mukta", 15), bg="lightgray",
                            activebackground="lightgray", cursor="hand2", borderwidth=0, relief="flat", highlightthickness=0, command=self.clear).place(x=400, y=420, width=120, height=35)
         # image============
-        self.bg_img = Image.open("/Users/ramk./Desktop/Bugs/mini/Sql-Database-Miniproject/images/result.jpg")
+        self.bg_img = Image.open("images/result.jpg")
         self.bg_img = self.bg_img.resize(
             (400, 400), Image.Resampling.LANCZOS)
         self.bg_img = ImageTk.PhotoImage(self.bg_img)
@@ -119,6 +119,7 @@ class ResultClass:
                     marks = int(self.var_marks.get())
                     total_marks = int(self.var_fullmarks.get())
                     percentage = (marks*100)/total_marks
+                    x = round(percentage, 2)
 
                     insert_query = "INSERT INTO result (roll, name, course, marks_ob, full_marks, per) VALUES (?, ?, ?, ?, ?, ?)"
                     data = (
@@ -127,8 +128,8 @@ class ResultClass:
                         self.var_course.get(),
                         self.var_marks.get(),
                         self.var_fullmarks.get(),
-                        str(percentage))
-
+                        str(x))
+                    print(x)
                     cursor.execute(insert_query, data)
 
                     con.commit()

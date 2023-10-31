@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 from course import CourseClass
 from student import StudentClass
 from results import ResultClass
+from report import ReportClass
 
 
 class RMS:
@@ -16,7 +17,7 @@ class RMS:
                       'bold'), bg="#FFBE79", fg="#374151").place(x=0, y=0, relwidth=1, height=50)
         # menu
         m_frame = LabelFrame(self.root, text="Menu", font=(
-            "Mukta", 15),fg='black' ,bg="white", padx=5)
+            "Mukta", 15), fg='black', bg="white", padx=5)
         m_frame.place(x=10, y=70, width=1400, relwidth=1, height=80)
 
         btn_course = Button(m_frame, text="Course", font=(
@@ -26,11 +27,11 @@ class RMS:
         btn_result = Button(m_frame, text="Result", font=(
             "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2", command=self.add_result).place(x=460, y=5, width=200, height=40)
         btn_view = Button(m_frame, text="View Results", font=(
-            "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=680, y=5, width=200, height=40)
-        btn_logout = Button(m_frame, text="Logout", font=(
-            "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=900, y=5, width=200, height=40)
-        btn_exit = Button(m_frame, text="Exit", font=(
-            "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=1120, y=5, width=200, height=40)
+            "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2", command=self.report).place(x=680, y=5, width=200, height=40)
+        # btn_logout = Button(m_frame, text="Logout", font=(
+        #     "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=900, y=5, width=200, height=40)
+        # btn_exit = Button(m_frame, text="Exit", font=(
+        #     "Mukta", 15), bg="#FFBE79", fg="#374151", borderwidth=0, relief="flat", highlightthickness=0, cursor="hand2").place(x=1120, y=5, width=200, height=40)
 
         # main screen BG
         self.bg_img = Image.open("images/bg.jpg")
@@ -64,6 +65,10 @@ class RMS:
     def add_result(self):
         self.new_win = Toplevel(self.root)
         self.new_obj = ResultClass(self.new_win)
+
+    def report(self):
+        self.new_win = Toplevel(self.root)
+        self.new_obj = ReportClass(self.new_win)
 
 
 if __name__ == "__main__":
